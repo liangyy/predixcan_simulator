@@ -19,10 +19,10 @@ opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
 .is_spike_n_slab = function(str) {
-  is.na(stringr::str_match(str, 'spike_n_slab_')[1,1])
+  ! is.na(stringr::str_match(str, 'spike_n_slab_')[1,1])
 }
 .get_spike_n_slab_frac = function(str) {
-  as.numeric(stringr::str_remove(str, 'spike_n_slab_')[1,1])
+  as.numeric(stringr::str_remove(str, 'spike_n_slab_'))
 }
 
 simulate_beta = function(distr, n) {
@@ -52,7 +52,7 @@ indiv_mat = pred_expr[, 1 : 2]  # individual IDs
 beta = simulate_beta(opt$beta_dist, ncol(x_mat))
 
 # calculate poly gene effect
-y_gene = x_mat %*% beta
+y_gene = as.matrix(x_mat) %*% beta
 
 # calculate error term
 var_error = calc_var_error(y_gene, opt$pve)

@@ -5,9 +5,9 @@ rule all:
     input:
         '{outdir}/{name_tag}.pred_expr.txt'.format(**config)
 
-rule simulate:
+rule all_simulate:
     input:
-        '{outdir}/{name_tag}.simulated_phenotype.{mode}_x_pve{pve}.txt'.format(**config, mode=config['params']['beta_dist'], pve=config['params']['pve'])
+        '{outdir}/{name_tag}.simulated_phenotype.{beta_dist}_x_pve{pve}.txt'.format(**config)
 
 rule pred_expr:
     input:
@@ -37,7 +37,7 @@ rule simulate:
     shell:
         'Rscript predixcan_simulator.R \
             --pred_expr {input.pred_expr} \
-            --pve {config[params][pve]} \
-            --beta_dist {config[params][beta_dist]} \
+            --pve {config[pve]} \
+            --beta_dist {config[beta_dist]} \
             --output {output[0]}'
             
