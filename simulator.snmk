@@ -5,6 +5,10 @@ rule all:
     input:
         '{outdir}/{name_tag}.pred_expr.txt'.format(**config)
 
+rule simulate:
+    input:
+        '{outdir}/{name_tag}.simulated_phenotype.{mode}_x_pve{pve}.txt'.format(**config, mode=config['params']['beta_dist'], pve=config['params']['pve'])
+
 rule pred_expr:
     input:
         geno = config['genotype_vcf'],
@@ -24,4 +28,16 @@ rule pred_expr:
             --prediction_summary_output {output.summary} \
             --verbosity 9 \
             --throw'
-        
+
+rule simulate:
+    input:
+        pred_expr = '{outdir}/{name_tag}.pred_expr.txt'
+    output:
+        '{outdir}/{name_tag}.simulated_phenotype.{mode}_x_pve{pve}.txt'
+    shell:
+        'Rscript predixcan_simulator.R \
+            --pred_expr {input.pred_expr} \
+            --pve {config[params][pve]} \
+            --beta_dist {config[params][beta_dist]} \
+            --output {output[0]}'
+            
