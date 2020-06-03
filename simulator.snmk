@@ -16,7 +16,7 @@ rule pred_expr:
     shell:
         'python {config[predict_script]} \
             --model_db_path {input.db} \
-            --vcf_genotypes $DATA/1000G_hg38/ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz \
+            --vcf_genotypes {input.geno} \
             --vcf_mode genotyped \
             --variant_mapping {input.var_map} id rsid \
             --on_the_fly_mapping METADATA "chr{{}}_{{}}_{{}}_{{}}_b38" \

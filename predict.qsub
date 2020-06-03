@@ -1,0 +1,15 @@
+#PBS -S /bin/bash
+#PBS -l walltime=24:00:00
+#PBS -l nodes=1:ppn=1
+#PBS -l mem=4gb
+#PBS -e predict.err
+#PBS -o predict.out
+
+source ~/.bash_profile
+source ~/.bashrc
+cd /home/t.cri.yliang/scratch/predixcan_simulation/predixcan_simulator 
+
+conda activate metaxcan
+
+/home/t.cri.yliang/miniconda2/envs/mixqtl/bin/snakemake -s simulator.snmk --configfile config.yaml -p
+
