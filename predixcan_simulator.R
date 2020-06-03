@@ -13,7 +13,7 @@ option_list <- list(
     make_option(c("-o", "--output"), type="character", default=NULL,
                 help="Output simulated phenotype",
                 metavar="character"),
-    make_option(c("-o", "--output_beta"), type="character", default=NULL,
+    make_option(c("-u", "--output_beta"), type="character", default=NULL,
                 help="Output corresponding gene effect sizes",
                 metavar="character")
 )

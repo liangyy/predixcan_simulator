@@ -17,6 +17,6 @@ for h2 in $h2_array
 do
   for nonzerofrac in $nonzerofrac_array
   do
-    snakemake -s simulator.snmk --configfile config.yaml -p all_simulate --config beta_dist=$mode$nonzerofrac pve=$h2
+    snakemake -s simulator.snmk --configfile config.yaml -p all_simulate --config beta_dist=$modepre$nonzerofrac pve=$h2
   done
 done
