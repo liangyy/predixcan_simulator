@@ -11,7 +11,10 @@ option_list <- list(
                 help="Effect size distribution ('infinitesimal', 'spike_n_slab_N', with N be the fraction of non-zeros)",
                 metavar="character"),
     make_option(c("-o", "--output"), type="character", default=NULL,
-                help="Output",
+                help="Output simulated phenotype",
+                metavar="character"),
+    make_option(c("-o", "--output_beta"), type="character", default=NULL,
+                help="Output corresponding gene effect sizes",
                 metavar="character")
 )
 
@@ -60,6 +63,10 @@ var_error = calc_var_error(y_gene, opt$pve)
 # simulate phenotype
 y = y_gene + rnorm(nrow(x_mat), sd = sqrt(var_error))
 
-# save
+# save y
 y = cbind(indiv_mat, data.frame(pheno = y))
 write.table(y, opt$output, sep = '\t', quote = FALSE, row = FALSE, col = TRUE)
+
+# save gene-level effect size
+df_beta = data.frame(gene_id = colnames(x_mat), effect_size = beta)
+write.table(df_beta, opt$output_beta, sep = '\t', quote = FALSE, row = FALSE, col = TRUE)
