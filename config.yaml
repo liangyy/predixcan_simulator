@@ -1,0 +1,5 @@
+variant_map: /scratch/t.cri.yliang/data/gtex_v8_eur_filtered_maf0.01_monoallelic_variants.txt.gz
+genotype_vcf: /scratch/t.cri.yliang/data/1000G_hg38/ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz
+predictdb: /scratch/t.cri.yliang/data/models/gtex_v8_en/en_Whole_Blood.db
+predict_script: /gpfs/data/im-lab/nas40t2/yanyul/GitHub/MetaXcan/software/Predict.py
+name_tag: 'ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38_x_en_Whole_Blood'
